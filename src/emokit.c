@@ -147,7 +147,7 @@ int emokit_open(struct emokit_device* s, int device_vid, int device_pid, unsigne
 
 	device_cur = devices;
 	if(!devices) {
-		fprintf(stderr, "libemokit: No Matching Devices, check USB ID\n");
+		fprintf_override("libemokit: No Matching Devices, check USB ID\n");
 		return E_EMOKIT_NOT_OPENED;
 	}
 
@@ -155,7 +155,7 @@ int emokit_open(struct emokit_device* s, int device_vid, int device_pid, unsigne
 		if(count == device_index) {
 			s->_dev = hid_open_path(device_cur->path);
 			if(!s->_dev)
-				fprintf(stderr, "libemokit: Failed to open device #%d, insuffient permissions?\n", count+1);
+				fprintf_override("libemokit: Failed to open device #%d, insuffient permissions?\n", count + 1);
 			found = 1;
 			break;
 		}
@@ -164,7 +164,7 @@ int emokit_open(struct emokit_device* s, int device_vid, int device_pid, unsigne
 	}
 
 	if(found == 0)
-		fprintf(stderr, "libemokit: Insuffient Devices Found For #%d out of %d\n", device_index+1, count);
+		fprintf_override("libemokit: Insuffient Devices Found For #%d out of %d\n", device_index+1, count);
 
 	hid_free_enumeration(devices);
 	if(!s->_dev) {
