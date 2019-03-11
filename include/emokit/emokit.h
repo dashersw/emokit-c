@@ -28,10 +28,17 @@
 #define EMOKIT_DECLSPEC __declspec(dllexport)
 #endif
 
+#if defined(__linux__)
 /// Vendor ID for all emotiv devices
 const static uint32_t EMOKIT_VID = 0x1234;
 /// Product ID for all emotiv devices
 const static uint32_t EMOKIT_PID = 0xed02;
+#elif defined(__MACH__)
+/// Vendor ID for all emotiv devices
+const static uint32_t EMOKIT_VID = 0x21a1;
+/// Product ID for all emotiv devices
+const static uint32_t EMOKIT_PID = 0x0001;
+#endif
 
 /// Out endpoint for all emotiv devices
 const static uint32_t EMOKIT_OUT_ENDPT = 0x02;
